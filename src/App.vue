@@ -1,29 +1,37 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+      <show-blogs></show-blogs>
+
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+
+<script>
+
+  import addBlog from './components/addBlog.vue';
+  import showBlogs from './components/showBlogs.vue';
+
+
+  export default {
+    components: {
+      'add-blog': addBlog,
+      'show-blogs': showBlogs
+    },
+
+    data() {
+      return {
+
+
+
+      }
     }
+
+
   }
-}
+</script>
+
+<style scoped lang="scss">
+  body{margin:0;
+ }
+
 </style>
