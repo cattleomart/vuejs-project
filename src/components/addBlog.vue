@@ -50,78 +50,75 @@
 
 
 <script>
+export default {
+  components: {},
 
-    export default {
-        components: {
-
-        },
-
-        data() {
-            return {
-                blog: {
-                    title: "",
-                    content: "",
-                    categories: [],
-                    author: ""
-
-                }, authors: ['Cathal', 'NetNinja', 'angular avenger', 'Vue Vindicator'],
-                submitted: false,
-            }
-        },
-        methods: {
-            post: function () {
-
-                this.$http.post('https://jsonplaceholder.typicode.com/posts', {
-                    title: this.blog.title,
-                    body: this.blog.content,
-                    userID: 1
-                }).then(function (data) { this.submitted = true; console.log(data); });
-            }
-        }
-
-
+  data() {
+    return {
+      blog: {
+        title: "",
+        content: "",
+        categories: [],
+        author: ""
+      },
+      authors: ["Cathal", "NetNinja", "angular avenger", "Vue Vindicator"],
+      submitted: false
+    };
+  },
+  methods: {
+    post: function() {
+      this.$http
+        .post(
+          'https://vue-js-playlist-18e66.firebaseio.com/posts.json',
+          this.blog
+        )
+        .then(function(data) {
+          this.submitted = true;
+          console.log(data);
+        });
     }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-    #add-blog * {
-        box-sizing: border-box;
-    }
+#add-blog * {
+  box-sizing: border-box;
+}
 
-    #add-blog {
-        margin: 20px auto;
-        max-width: 500px;
-    }
+#add-blog {
+  margin: 20px auto;
+  max-width: 500px;
+}
 
-    label {
-        display: block;
-        margin: 20px 0 10px;
-    }
+label {
+  display: block;
+  margin: 20px 0 10px;
+}
 
-    input[type="text"],
-    textarea {
-        display: block;
-        width: 100%;
-        padding: 8px;
-    }
+input[type="text"],
+textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+}
 
-    #preview {
-        padding: 10px 20px;
-        border: 1px dotted #ccc;
-        margin: 30px 0;
-    }
+#preview {
+  padding: 10px 20px;
+  border: 1px dotted #ccc;
+  margin: 30px 0;
+}
 
-    h3 {
-        margin-top: 10px;
-    }
+h3 {
+  margin-top: 10px;
+}
 
+#checkboxes input {
+  display: inline-block;
+  margin-right: 10px;
+}
 
-    #checkboxes input {
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    #checkboxes label {
-        display: inline-block;
-    }
+#checkboxes label {
+  display: inline-block;
+}
 </style>

@@ -1,10 +1,10 @@
 <template>
     <div v-theme:column="'narrow'" id="show-blogs">
-        <h1>All Blog articles</h1>
+        <h1>List Blog titles</h1>
         <input type="text" v-model="search" placeholder="search box" />
         <div v-for="blog in filteredBlogs" class="single-blog">
-          <router-link v-bind:to ="'/blog/' + blog.id">  <h2> {{blog.title | to-uppercase}}</h2>   </router-link>
-            <article>{{blog.content | snippet}}</article>
+            <h2 v-rainbow> {{blog.title | to-uppercase}}</h2>
+           
         </div>
 
     </div>
@@ -24,18 +24,10 @@ export default {
 
   created() {
     this.$http
-      .get("https://vue-js-playlist-18e66.firebaseio.com/posts.json")
+      .get("https://jsonplaceholder.typicode.com/posts")
       .then(function(data) {
-        return data.json();
-      })
-      .then(function(data) {
-          var blogsArray =[];
-          for(let key in data){data[key].id = key
-          blogsArray.push(data[key]); this.blogs  = blogsArray;
-          
-          
-          }
         console.log(data);
+        this.blogs = data.body.slice(0, 10);
       });
   },
   computed: {},
@@ -49,6 +41,7 @@ export default {
       return value.slice(0, 100) + "...";
     }
   },
+
   directives: {
     rainbow: {
       bind(el, binding, vnode) {
@@ -61,7 +54,7 @@ export default {
     }
   },
 
-  mixins: [searchMixin]
+  mixins: [ searchMixin ]
 };
 </script>
 
